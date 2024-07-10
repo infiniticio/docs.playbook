@@ -1,0 +1,36 @@
+# Common settings
+pulsar:
+  tenant: infinitic
+  namespace: dev-java
+
+# Workers settings
+storage:
+  #inMemory:
+  mysql:
+  #  host: localhost
+  #  port: 3306
+  #  user: root
+  #  password:
+  #  database: infinitic
+  #redis:
+  #  host: localhost
+  #  port: 6379
+  #  user:
+  #  password:
+  #  database: 0
+
+services:
+  - name: AsyncMethodRemoteService
+    class: io.infinitic.playbook.java.asyncMethod.services.RemoteServiceImpl
+    concurrency: 10
+
+workflows:
+  - name: AsyncMethodWorkflow
+    class: io.infinitic.playbook.java.asyncMethod.workflows.AsyncMethodWorkflowImpl
+    concurrency: 10
+  - name: RecurringWorkflow
+    class: io.infinitic.playbook.java.scheduler.workflows.RecurringWorkflowImpl
+    concurrency: 10
+  - name: RecurringWorkflowScheduler
+    class: io.infinitic.playbook.java.scheduler.workflows.RecurringWorkflowSchedulerImpl
+    concurrency: 10

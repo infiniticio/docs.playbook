@@ -1,0 +1,58 @@
+plugins {
+    // Apply the Kotlin JVM plugin to add support for Kotlin.
+    id 'org.jetbrains.kotlin.jvm' version '2.0.0'
+}
+
+repositories {
+    mavenLocal()
+    maven { url = 'https://s01.oss.sonatype.org/content/repositories/snapshots/' }
+    mavenCentral()
+}
+
+dependencies {
+    // Cron
+    implementation 'com.cronutils:cron-utils:9.2.1'
+    // Logger
+    implementation 'org.slf4j:slf4j-simple:2.0.3'
+    // Infinitic
+    String version = '0.14.1-SNAPSHOT'
+    implementation 'io.infinitic:infinitic-client:' + version
+    implementation 'io.infinitic:infinitic-worker:' + version
+}
+
+// Apply a specific Java toolchain to ease working on different environments.
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+tasks.register('run', JavaExec) {
+    group = "infinitic"
+    mainClass = 'io.infinitic.playbook.java.Worker'
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+tasks.register('async-method-start', JavaExec) {
+    group = 'infinitic'
+    mainClass = 'io.infinitic.playbook.java.asyncMethod.Start'
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+tasks.register('async-method-stop', JavaExec) {
+    group = "infinitic"
+    mainClass = 'io.infinitic.playbook.java.asyncMethod.Stop'
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+tasks.register('scheduler-start', JavaExec) {
+    group = 'infinitic'
+    mainClass = 'io.infinitic.playbook.java.scheduler.Start'
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+tasks.register('scheduler-stop', JavaExec) {
+    group = "infinitic"
+    mainClass = 'io.infinitic.playbook.java.scheduler.Stop'
+    classpath = sourceSets.main.runtimeClasspath
+}
