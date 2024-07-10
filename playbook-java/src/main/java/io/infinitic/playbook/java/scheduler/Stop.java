@@ -9,7 +9,7 @@ public class Stop {
 
     public static void main(String[] args) {
         try(InfiniticClient client = InfiniticClient.fromConfigResource("/infinitic.yml")) {
-            // cancelling the existing RecurringWorkflowScheduler instances with the "recurring" tag
+            // cancelling the existing RecurringWorkflowScheduler instances with the "scheduler" tag
             RecurringWorkflowScheduler scheduler = client.getWorkflowByTag(RecurringWorkflowScheduler.class, schedulerTag);
             client.cancel(scheduler);
         }

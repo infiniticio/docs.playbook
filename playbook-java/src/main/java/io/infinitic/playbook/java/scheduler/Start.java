@@ -11,7 +11,7 @@ public class Start {
 
     public static void main(String[] args) {
         try(InfiniticClient client = InfiniticClient.fromConfigResource("/infinitic.yml")) {
-            // create a stub for SignalWorkflow, with tag "recurring"
+            // create a stub for RecurringWorkflowScheduler, with tag "scheduler"
             RecurringWorkflowScheduler workflow = client.newWorkflow(RecurringWorkflowScheduler.class, Set.of(schedulerTag));
 
             // start new workflow
